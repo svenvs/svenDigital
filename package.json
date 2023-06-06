@@ -1,0 +1,25 @@
+{
+  "name": "svendigital",
+  "version": "0.0.1",
+  "description": "Blog for all my digital endeavours",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/svenvs/svenDigital.git"
+  },
+  "keywords": [
+    "Blog"
+  ],
+  "author": "Sven van Straalen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/svenvs/svenDigital/issues"
+  },
+  "homepage": "https://github.com/svenvs/svenDigital#readme",
+  "devDependencies": {
+    "@11ty/eleventy": "^2.0.1"
+  }
+}
