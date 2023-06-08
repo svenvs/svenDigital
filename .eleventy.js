@@ -1,4 +1,5 @@
 module.exports = function (eleventyConfig) {
+    eleventyConfig.addPassthroughCopy('./site/assets');
     eleventyConfig.addCollection("postSortByDate", function(collectionApi) {
 
       return collectionApi.getFilteredByTag('post').sort(function(a, b) {
