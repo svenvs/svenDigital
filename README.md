@@ -8,13 +8,14 @@ https://dev.to/22mahmoud/how-to-optimize-and-lazyload-images-on-eleventy-11ty-20
 
 ## todo
 - [x] add menu bar
-- [ ] make menu responsive
+- [x] make menu responsive
 - [x] add logo
 - [ ] global 11ty vars site title etc
 - [ ] auto generate menu items
 - [x] Create footer
 - [ ] Create home page
 - [x] create default template
+- [ ] Hidden but not so hidden styleguide page
 - [ ] create blog template
 - [ ] create photo portfolio template
 - [ ] filter meganism posts
