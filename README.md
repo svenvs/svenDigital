@@ -10,7 +10,7 @@ https://dev.to/22mahmoud/how-to-optimize-and-lazyload-images-on-eleventy-11ty-20
 - [x] add menu bar
 - [x] make menu responsive
 - [x] add logo
-- [ ] global 11ty vars site title etc
+- [x] global 11ty vars site title etc
 - [ ] auto generate menu items
 - [x] Create footer
 - [ ] Create home page
@@ -28,6 +28,8 @@ https://dev.to/22mahmoud/how-to-optimize-and-lazyload-images-on-eleventy-11ty-20
 - [ ] Change pipeline only when testing OK deploy to pr
 - [ ] Change pipeline deploy test branch to test env
 - [ ] Performance images
+- [ ] Performance SASS
+- [ ] PWA
 - [ ] Great colors light
 - [ ] Great colors dark
 - [ ] First content
