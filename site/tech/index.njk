@@ -3,5 +3,26 @@ layout: layouts/defaultLayout.njk
 menuActive: tech
 ---
 
-
-<p> Tech page </p>
+<main class="container pt-2">
+    <div class="row">
+        <div class="col-md-8">
+            <h1 class="pb-4 mb-4 fst-italic border-bottom">
+                Tech
+            </h1>
+            {%- for post in collections.techSortByDate -%}
+                <div class="card mb-3">
+                    <img src="{{post.data.imgcard}}" class="card-img-top" alt="{{post.data.featuredIMGALT}}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{post.data.title}}</h5>
+                        <p class="card-text">{{post.data.featuredText}}</p>
+                        <p class="card-text">
+                            <small class="text-body-secondary">{{post.data.date}}</small>
+                        </p>
+                        <a href="{{post.url}}" class="btn btn-primary">Read more</a>
+                    </div>
+                </div>
+            {%- endfor -%}
+        </div>
+        {% include 'components/sidebar.njk' %}
+    </div>
+</main>

@@ -1,10 +1,11 @@
 ---
 title: Frontend Developers Meetup
-previewImg: feDevMeetup.jpeg
-previewImgAlt: front end developers meetup image
+imgcard: feDevMeetup.jpeg
+featuredIMGALT: front end developers meetup image
 layout: layouts/blogSidebar.njk
+featuredText: Hi there, as Capgemini employees we were able to create our first meetup last Thursday. Capgemini has a community called 'WebApps' where we show and tell our futurestack or whatever cool stuff we find on the internet and share with each other. Usually, these meetings are for Capgemini employees only, but this time it was for everyone who was interested. 
 date: 2018-07-02 20:12:16
-tags:
+tags: tech
 ---
 Hi there, as Capgemini employees we were able to create our first meetup last Thursday. Capgemini has a community called 'WebApps' where we show and tell our futurestack or whatever cool stuff we find on the internet and share with each other. Usually, these meetings are for Capgemini employees only, but this time it was for everyone who was interested. 
 
