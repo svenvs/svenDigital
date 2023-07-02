@@ -9,6 +9,8 @@ https://dev.to/22mahmoud/how-to-optimize-and-lazyload-images-on-eleventy-11ty-20
 ## todo
 - [x] add menu bar
 - [x] make menu responsive
+- [ ] Sticky menu bar
+- [ ] Fake neural network cover page
 - [x] add logo
 - [x] global 11ty vars site title etc
 - [ ] auto generate menu items
