@@ -1,0 +1,158 @@
+<!DOCTYPE html> 
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Digital Sven</title>
+    <link href="/main.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico">
+  </head>
+<body>
+  <header class="text-bg-dark  sticky-top ">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="/assets/logo.png" width="40" height="40" alt="the logo of the site" class="d-inline-block align-text-top">
+          Digital Sven
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar2"
+          aria-controls="offcanvasNavbar2"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+    class="offcanvas offcanvas-end text-bg-dark"
+    tabindex="-1"
+    id="offcanvasNavbar2"
+    aria-labelledby="offcanvasNavbar2Label">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Digital Sven</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+                
+                    <a class="nav-link" href="/">Home</a>
+                
+            </li>
+            <li class="nav-item">
+                
+                    <a class="nav-link" href="/tech/">Tech</a>
+                
+            </li>
+            <li class="nav-item">
+                
+                    <a class="nav-link" href="/photo/">Photo</a>
+                
+            </li>
+            <li class="nav-item">
+                
+                    <a class="nav-link" href="/music/">Music</a>
+                
+            </li>
+            <li class="nav-item">
+                
+                    <a class="nav-link" href="/about/">About</a>
+                
+            </li>
+            
+        </ul>
+        
+    </div>
+</div>
+      </div>
+    </nav>
+  </header>
+<main class="container pt-3">
+  <div class="row">
+    <div class="col-md-8">
+      <h1 class="pb-4 mb-4 fst-italic border-bottom">
+        Why use server-side rendering
+      </h1>
+      <article class="blog-post">
+        <p>In the front-end world, we went from jQuery to all kinds of different frameworks. The Single Page Applications (SPAs) make a big footprint in our world wide web. There are some issues that we miss with this approach:</p>
+<ul>
+<li>
+<p>Search engine optimization</p>
+</li>
+<li>
+<p>Performance on slow devices</p>
+</li>
+<li>
+<p>Loading speed</p>
+</li>
+</ul>
+<p>In this blog I will explain how Server-Side Rendering could help you to fix these issues.</p>
+<h2>Why does a client-side rendered application have these issues?</h2>
+<p>It comes down to the critical render path of a browser. The first thing that will load when you go to a website is the HTML. To render the HTML, the browser will go from left to right, top to bottom in the HTML. This means that it will start loading all the files that you have linked to it, like the JavaScript and CSS. When it has the CSS, it will start rendering the CSS and this will make the first paint on the screen. At this moment a user could already see something on their screen. After that moment, it will start compiling and running the JavaScript.</p>
+<p>So, what does that look like in a client-side rendered application? When the users browse to your application/website, it will get the HTML file. However, this HTML file is completely empty, it does not have content. This is because frameworks like Angular, Vue and React control the rendering of your application in the JavaScript part. So, when it's done loading the CSS, nothing will happen yet, because there is no content. The JavaScript part will add the content and at that moment it will be visible. (See the image below to see what it looks like.)</p>
+<img src="/assets/post/why-server-side-rendering/timeLine-csr.png" class="img-fluid mb-2 mx-auto" alt="Time line CSR basically you see that the screen loads as last">
+<p>In respect to SEO, this is a disadvantage because there is no content at your application, so a crawler won't be able to crawl your data (Google is now able to crawl it, but all the others are not). You will especially notice this when you have meta tags for social media or want them dynamic for your pages. Most social media scrapers are not running the JavaScript from your applications and then the metadata won't be added when someone is sharing one or your pages.</p>
+<h2>Well, how does server-side rendering solve these issues?</h2>
+<p>With server-side rendering, the HTML is being rendered first on the server side. So, at the moment a user goes to your website/application the HTML that the browser receives already contains the content that it will be needing for making the first paint. This means that Angular, Vue and React will run on the server. Also, the API calls will happen on the server side, so there is less communication from front end to back end. When the CSS is compiled there will be a screen ready on the screen.</p>
+<img src="/assets/post/why-server-side-rendering/timeLine-ssr.png" class="img-fluid mb-2 mx-auto" alt="Time line SSR basically you see that the screen loads faster">
+<p>Now, the only it needs is the JavaScript to make the page interactive. However, we have a better perceived performance, as the user can already see the content while the JavaScript is loading, compiling and eventually running in the background. Moreover, because the HTML already contains content, the crawlers and scrapers will be able to read it, which is beneficial for SEO.</p>
+<h2>Let’s compare CSR with SSR</h2>
+<p>In the video below, I took Client-Side Rendering and Server-Side Rendering to the test. Here, I am using a 3G network and a slow mobile phone. You can create these kinds of video’s at https://www.webpagetest.org/. Small side note is that there are a lot of other factors that influence the loading speed, but both pages in the video were hosted on AWS in an Elastic Beanstalk with a Node.js server with Express in production mode. The front end is Angular, with Angular Universal for the server-side rendered one.</p>
+<video  controls>
+  <source src="/assets/post/why-server-side-rendering/csr-ssr.mp4" class="mx-auto" type="video/mp4">
+  Your browser does not support HTML5 video.
+</video>
+<p>The differences in regards to social media are visible in the image below. Of the Client Side Rendered version, you can only see the link. Server Side Rendering on the other hand already shows an image.</p>
+  <div class="row">
+    <div class="col-sm">
+        <h3>Server Side</h3>
+      <img src="/assets/post/why-server-side-rendering/twitter-ssr.png" class="img-fluid mb-2" alt="Twitter image of a card server side">
+      <img src="/assets/post/why-server-side-rendering/wa-ssr.png" class="img-fluid mb-2" alt="whatsapp image of a card server side">
+    </div>
+    <div class="col-sm">
+              <h3>client Side</h3>
+      <img src="/assets/post/why-server-side-rendering/twitter-csr.png" class="img-fluid mb-2" alt="Twitter image of a card client side">
+      <img src="/assets/post/why-server-side-rendering/wa-csr.png" class="img-fluid mb-2" alt="whatsapp image of a card server side">
+    </div>
+  </div>
+<h2>Conclusion</h2>
+<p>If you are not using Server Side Rendering for the performance, it is still very useful for the SEO of your application. Keep in mind that Server-Side Rendering adds more serverload. This load can be reduced by for example using a CDN caching mechanism to cache the Server-Side Rendered pages.</p>
+<p>Happy coding!</p>
+
+      </article>
+    </div>
+    <div class="col-md-4">
+    <div class="position-sticky" style="top: 5rem;">
+        <div class="p-4 mb-3 bg-body-tertiary rounded">
+            <h4 class="fst-italic">About</h4>
+            <p class="mb-0">Hi Digital Sven here. Here you can find all my digital yourneys or the one's that i have digitalized by making nice photos or mixing music hope you like it!</p>
+        </div>
+        
+    </div>
+</div>
+  </div>
+
+</main>
+<div class="container">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <p class="col-md-4 mb-0 text-body-secondary">© 2023 Digital Sven</p>
+    
+
+    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+      <img src="/assets/logo.png" width="60" height="60" alt="the logo of the site">
+    </a>
+
+    <ul class="nav col-md-4 justify-content-end">
+      <li class="nav-item"><a href="/" class="nav-link px-2 text-body-secondary">Home</a></li>
+      <li class="nav-item"><a href="/tech/" class="nav-link px-2 text-body-secondary">Tech</a></li>
+      <li class="nav-item"><a href="/photo/" class="nav-link px-2 text-body-secondary">Photo</a></li>
+      <li class="nav-item"><a href="/music/" class="nav-link px-2 text-body-secondary">Music</a></li>
+      <li class="nav-item"><a href="/about/" class="nav-link px-2 text-body-secondary">About</a></li>
+    </ul>
+    <p class="col-md-4 mb-0 text-body-secondary">V0.0.7, build Date: Tue, 11 Jul 2023 14:57:21 GMT</p>
+  </footer>
+</div>  
+  <script src="/main.js"></script>
+</body> 
+</html>

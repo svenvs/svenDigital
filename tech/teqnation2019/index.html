@@ -1,0 +1,129 @@
+<!DOCTYPE html> 
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Digital Sven</title>
+    <link href="/main.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico">
+  </head>
+<body>
+  <header class="text-bg-dark  sticky-top ">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="/assets/logo.png" width="40" height="40" alt="the logo of the site" class="d-inline-block align-text-top">
+          Digital Sven
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar2"
+          aria-controls="offcanvasNavbar2"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+    class="offcanvas offcanvas-end text-bg-dark"
+    tabindex="-1"
+    id="offcanvasNavbar2"
+    aria-labelledby="offcanvasNavbar2Label">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Digital Sven</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+                
+                    <a class="nav-link" href="/">Home</a>
+                
+            </li>
+            <li class="nav-item">
+                
+                    <a class="nav-link" href="/tech/">Tech</a>
+                
+            </li>
+            <li class="nav-item">
+                
+                    <a class="nav-link" href="/photo/">Photo</a>
+                
+            </li>
+            <li class="nav-item">
+                
+                    <a class="nav-link" href="/music/">Music</a>
+                
+            </li>
+            <li class="nav-item">
+                
+                    <a class="nav-link" href="/about/">About</a>
+                
+            </li>
+            
+        </ul>
+        
+    </div>
+</div>
+      </div>
+    </nav>
+  </header>
+<main class="container pt-3">
+  <div class="row">
+    <div class="col-md-8">
+      <h1 class="pb-4 mb-4 fst-italic border-bottom">
+        teqnation - Capman Galaxy
+      </h1>
+      <article class="blog-post">
+        <p>Whoohoo, I was lucky and could join another conference last week. But this time in a different role. This time I did not give a talk, but I was working for the recruitment booth. As you might expect, I did things my own way… and this was completely different than the usual stuff you expect at a booth.</p>
+<img src="/assets/post/teqnation2019/0.jpg" class="img-fluid mb-2 mx-auto" alt="image of capgemini booth at teqnation">
+<h2>The mission</h2>
+<p>Me and my development team had one mission, which was to show the other side of Capgemini. For most people if you see ‘Capgemini’, they think about a big company, and not about fun. However, there is so much more inside this company and we tried to show it with our game that we developed especially for this conference. This way, we let me people experience the fun side of Capgemini!</p>
+<h2>The game</h2>
+<p>What is old school and freaking awesome? SPACE INVADERS of course! Only we spiced up the game a bit. We have ‘Capman’, our main character, who is on a quest to crush all the bugs that he finds on his path. One day, he needs to go into the galaxy because bugs are invading our space. So he takes his ship named ‘Gelactic bug crusher’ into space to fight off the bugs. The bugs are coming in so many waves that he needs the help of Capgemini to give him much more firepower to make sure to crush them all! On the conference we turned this game into a competition: 4 people were playing at the same time to compete for the highest score. Moreover, at the booth we had a scoreboard which showed the highscores of the entire day.</p>
+<img src="/assets/post/teqnation2019/space.png" class="img-fluid mb-2 mx-auto" alt="spae game image">
+<h2>How did we build it?</h2>
+<p>We used a cool WebGL powered framework called ‘Phaser’. With this framework you can create a lot of games very easily by using some basic principles. In a few weeks from now I will be posting tutorials about Phaser and how to create a basic game.</p>
+<p>You can find the code of the space invaders game here: https://git.io/fjla4</p>
+<p>Please note: in order to keep the high scores in sync we used web sockets. We have used just the npm package called ws and express as a web server. On the server we have an admin dashboard and a scoreboard. Both where listening to the broadcast that the server was sending, the data that was being sent were the high scores. In the admin dashboard we also had some controls like starting end resetting games. To give it a real competitive feel, we let 4 players start at the same time. In the dashboard you send the “startGame” signal, which goes into the server and is broadcasted to all the connected players.</p>
+<p>Here you can find the code of the server: https://git.io/fjlaW</p>
+<p>We created the code within 10 days, so the code ain’t pretty, especially after some hot fixes. We will make a new version with some cleaner code, but this will take some more time.</p>
+<p>Don’t want to look into the code and just play the game? Check out this link: https://git.io/fj8Si</p>
+<p>Enjoy playing and hope to see you next time!</p>
+
+      </article>
+    </div>
+    <div class="col-md-4">
+    <div class="position-sticky" style="top: 5rem;">
+        <div class="p-4 mb-3 bg-body-tertiary rounded">
+            <h4 class="fst-italic">About</h4>
+            <p class="mb-0">Hi Digital Sven here. Here you can find all my digital yourneys or the one's that i have digitalized by making nice photos or mixing music hope you like it!</p>
+        </div>
+        
+    </div>
+</div>
+  </div>
+
+</main>
+<div class="container">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <p class="col-md-4 mb-0 text-body-secondary">© 2023 Digital Sven</p>
+    
+
+    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+      <img src="/assets/logo.png" width="60" height="60" alt="the logo of the site">
+    </a>
+
+    <ul class="nav col-md-4 justify-content-end">
+      <li class="nav-item"><a href="/" class="nav-link px-2 text-body-secondary">Home</a></li>
+      <li class="nav-item"><a href="/tech/" class="nav-link px-2 text-body-secondary">Tech</a></li>
+      <li class="nav-item"><a href="/photo/" class="nav-link px-2 text-body-secondary">Photo</a></li>
+      <li class="nav-item"><a href="/music/" class="nav-link px-2 text-body-secondary">Music</a></li>
+      <li class="nav-item"><a href="/about/" class="nav-link px-2 text-body-secondary">About</a></li>
+    </ul>
+    <p class="col-md-4 mb-0 text-body-secondary">V0.0.7, build Date: Tue, 11 Jul 2023 14:57:21 GMT</p>
+  </footer>
+</div>  
+  <script src="/main.js"></script>
+</body> 
+</html>

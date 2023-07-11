@@ -1,0 +1,202 @@
+<!DOCTYPE html> 
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Digital Sven</title>
+    <link href="/main.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/assets/icons/favicon.ico">
+  </head>
+<body>
+  <header class="text-bg-dark  sticky-top ">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" aria-label="Offcanvas navbar large">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="/assets/logo.png" width="40" height="40" alt="the logo of the site" class="d-inline-block align-text-top">
+          Digital Sven
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="offcanvas"
+          data-bs-target="#offcanvasNavbar2"
+          aria-controls="offcanvasNavbar2"
+          aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div
+    class="offcanvas offcanvas-end text-bg-dark"
+    tabindex="-1"
+    id="offcanvasNavbar2"
+    aria-labelledby="offcanvasNavbar2Label">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbar2Label">Digital Sven</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+            <li class="nav-item">
+                
+                    <a class="nav-link" href="/">Home</a>
+                
+            </li>
+            <li class="nav-item">
+                
+                    <a class="nav-link" href="/tech/">Tech</a>
+                
+            </li>
+            <li class="nav-item">
+                
+                    <a class="nav-link" href="/photo/">Photo</a>
+                
+            </li>
+            <li class="nav-item">
+                
+                    <a class="nav-link" href="/music/">Music</a>
+                
+            </li>
+            <li class="nav-item">
+                
+                    <a class="nav-link" href="/about/">About</a>
+                
+            </li>
+            
+        </ul>
+        
+    </div>
+</div>
+      </div>
+    </nav>
+  </header>
+<main class="container pt-3">
+  <div class="row">
+    <div class="col-md-8">
+      <h1 class="pb-4 mb-4 fst-italic border-bottom">
+        Track solar power with wemos and mqtt
+      </h1>
+      <article class="blog-post">
+        <p>I recently became the prouwd owner of some nice solar panels on my roof. And allong with that a new project for me started to figure out when we should consume the most energie to use all the solar power we get in our advandge. So in this simple project we are going to create a trafic light that is listening to a mqtt subscription. When the value go's above a certain threshold we will change the light of the traficlight</p>
+<h2>What do you need?</h2>
+<ul>
+<li>A wemos mini D1 (I am using the lite version)</li>
+<li>Green, red and yellow or orange led</li>
+<li>3 resistors +- 100 ohm (what is best for your LED)</li>
+<li>A breadboard</li>
+<li>Wires</li>
+<li>MQTT broker (I installed one on my Synology)</li>
+<li>MQTT Data publisher</li>
+</ul>
+<p>For the leds you can also use a trafic light there the resistors etc are already included. That is the one I am using in the tutorial.</p>
+<h2>the MQTT broker</h2>
+<p>For the MQTT server I installed <a href="https://mosquitto.org/" title="Eclipse Mosquitto Homepage">Eclipse Mosquitto</a> which was fairly easy to do with this <a href="https://www.youtube.com/watch?v=b3A1RJdDf-w" title="video how to install Mosquitto on synology">Youtube video</a>. You can also install Mosquitto on an Raspberry pi an nice tutorial for that one you can find here: <a href="https://randomnerdtutorials.com/how-to-install-mosquitto-broker-on-raspberry-pi/" title="tutorial install Mosquitto">Tutorial install Mosquitto on RPI</a>. When that is done remember your ipadress of the broker you will need it in a later state.</p>
+<h2>MQTT datapublisher</h2>
+<p>The Solar panel system that I have does not give an API to hook into so I had to get creative in getting the data in how much power is being delivered from the solar panels. This step is Ithink different for everyone in how to publish your data to the broker.</p>
+<p>In the Netherlands we have something that is called the &quot;Slimme meter&quot; translated to english Smart meter. Which basically measures your power consumption only digitally. This meter is also capable to measure the power you are delivering back the the grid. And most importantly we are able to tabinto this data with an P1 cable (Basically a Serial to usb cable).</p>
+<p>So for me this became fairly simple. I hooked up a raspberry pi with the P1 cable installed <a href="https://www.ztatz.nl/p1-monitor-download-202009/" title="p1 monitor download page">P1 monitor</a> which basically gives you alle the insights in the smart meter. And it has some cool funtionality to publish data to an MQTT broker.</p>
+<h3>Settings for publishing data to your MQTT broker</h3>
+<p>In order to publish data to your MQTT broker you login on your P1 monitor and go to the settings page. Her you will find a tab called MQTT. here you can set up the MQTT client parameters. Ive been using thses parameters:</p>
+<ul>
+<li>Client ID: A value to recognize the client I used defauld p1monitor</li>
+<li>Topic prefix: If you ever going to share more data its good to prefix the data I used default p1monitor</li>
+<li>Broker servername/IP: Ipadress of the server or url if you use an remote one</li>
+<li>Broker IP port: the port that is open for you default is 1883</li>
+<li>Broker keep alive time: is basically to check if the connection is still open I kept it default at 60seconds.</li>
+<li>Broker username and password. That is fully up to you to fill in :D</li>
+<li>Protocal version that I am using is MQTT V3.1.1</li>
+</ul>
+<p>And I am only sending smartmeter data at the moment. Dont forget to hit save at the right top of the screen can fast be over looked.</p>
+<h2>Setup WEMOS mini D1 and Arduino IDE</h2>
+<h2>A simple circuit</h2>
+<p>Now we have our data flowing in to the MQTT broker we can work our way to the client. Lets start by creating a simple circuit. In this circuit you can see how I wired the led's. In the diagram below I have added the one with resistors. If you are using the traficlight like I do in the example then you can wire the wires directly (resistor are already integrated). The following pins are connected to the certain led's:</p>
+<ul>
+<li>Green D8</li>
+<li>Yellow/ Orange D7</li>
+<li>Red D6</li>
+<li>and all led Ground cables to the ground pin.</li>
+</ul>
+<h2>WEMOS CODE step 1</h2>
+<p>First lets try if our circuit is working properly by turning on the LED's one by one. In the example code below we are doing tht time based. to have them all light up once.</p>
+<pre class="language-c"><code class="language-c"><span class="token keyword">int</span> YLED <span class="token operator">=</span> D7<span class="token punctuation">;</span> <span class="token comment">// Digital pin 7 Yellow LED</span>
+<span class="token keyword">int</span> GLED <span class="token operator">=</span> D8<span class="token punctuation">;</span> <span class="token comment">// Digital pin 8 Green LED</span>
+<span class="token keyword">int</span> RLED <span class="token operator">=</span> D6<span class="token punctuation">;</span> <span class="token comment">// Digital pin 6 Red LED</span>
+
+String trafficLightStatus <span class="token operator">=</span> <span class="token string">""</span><span class="token punctuation">;</span>
+
+<span class="token keyword">void</span> <span class="token function">updateTrafficLight</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token comment">// This method changes the light that has to go on or off. Its put in a seperate method</span>
+  <span class="token comment">// For later in this tutorial</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>trafficLightStatus <span class="token operator">==</span> <span class="token string">"GREEN"</span> <span class="token operator">&amp;&amp;</span> <span class="token function">digitalRead</span><span class="token punctuation">(</span>GLED<span class="token punctuation">)</span> <span class="token operator">!=</span> HIGH <span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">digitalWrite</span><span class="token punctuation">(</span>GLED<span class="token punctuation">,</span> HIGH<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Turning a pin to high means power will go to that pin</span>
+    <span class="token function">digitalWrite</span><span class="token punctuation">(</span>YLED<span class="token punctuation">,</span> LOW<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Turning a pin to LOW means power will be removed from that pin</span>
+    <span class="token function">digitalWrite</span><span class="token punctuation">(</span>RLED<span class="token punctuation">,</span> LOW<span class="token punctuation">)</span><span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">if</span><span class="token punctuation">(</span>trafficLightStatus <span class="token operator">==</span> <span class="token string">"YELLOW"</span> <span class="token operator">&amp;&amp;</span> <span class="token function">digitalRead</span><span class="token punctuation">(</span>YLED<span class="token punctuation">)</span> <span class="token operator">!=</span> HIGH <span class="token punctuation">)</span><span class="token punctuation">{</span>
+    <span class="token function">digitalWrite</span><span class="token punctuation">(</span>GLED<span class="token punctuation">,</span> LOW<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">digitalWrite</span><span class="token punctuation">(</span>YLED<span class="token punctuation">,</span> HIGH<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">digitalWrite</span><span class="token punctuation">(</span>RLED<span class="token punctuation">,</span> LOW<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+   <span class="token keyword">if</span><span class="token punctuation">(</span>trafficLightStatus <span class="token operator">==</span> <span class="token string">"RED"</span> <span class="token operator">&amp;&amp;</span> <span class="token function">digitalRead</span><span class="token punctuation">(</span>RLED<span class="token punctuation">)</span> <span class="token operator">!=</span> HIGH<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">digitalWrite</span><span class="token punctuation">(</span>GLED<span class="token punctuation">,</span> LOW<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">digitalWrite</span><span class="token punctuation">(</span>YLED<span class="token punctuation">,</span> LOW<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">digitalWrite</span><span class="token punctuation">(</span>RLED<span class="token punctuation">,</span> HIGH<span class="token punctuation">)</span><span class="token punctuation">;</span>
+   <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">setup</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token function">pinMode</span><span class="token punctuation">(</span>YLED<span class="token punctuation">,</span> OUTPUT<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Make YLED pin D7 an output pin</span>
+  <span class="token function">pinMode</span><span class="token punctuation">(</span>GLED<span class="token punctuation">,</span> OUTPUT<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Make BLED pin D6 an output pin</span>
+  <span class="token function">pinMode</span><span class="token punctuation">(</span>RLED<span class="token punctuation">,</span> OUTPUT<span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Make BLED pin D6 an output pin</span>
+  <span class="token function">pinMode</span><span class="token punctuation">(</span>BUILTIN_LED<span class="token punctuation">,</span> OUTPUT<span class="token punctuation">)</span><span class="token punctuation">;</span>     <span class="token comment">// Initialize the BUILTIN_LED pin as an output</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">void</span> <span class="token function">loop</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token comment">// First we make the status green</span>
+    trafficLightStatus <span class="token operator">=</span> <span class="token string">"GREEN"</span><span class="token punctuation">;</span>
+    <span class="token function">updateTrafficLight</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// waits a second to continue</span>
+    trafficLightStatus <span class="token operator">=</span> <span class="token string">"YELLOW"</span><span class="token punctuation">;</span>
+    <span class="token function">updateTrafficLight</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// waits a second to continue</span>
+    trafficLightStatus <span class="token operator">=</span> <span class="token string">"RED"</span><span class="token punctuation">;</span>
+    <span class="token function">updateTrafficLight</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token function">delay</span><span class="token punctuation">(</span><span class="token number">1000</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// waits a second to continue and restarts loop</span>
+<span class="token punctuation">}</span></code></pre>
+<p>After compiling and uploading the code your leds should be lighting up in a simmiliar way like this:
+(gifje van lampjes)</p>
+
+      </article>
+    </div>
+    <div class="col-md-4">
+    <div class="position-sticky" style="top: 5rem;">
+        <div class="p-4 mb-3 bg-body-tertiary rounded">
+            <h4 class="fst-italic">About</h4>
+            <p class="mb-0">Hi Digital Sven here. Here you can find all my digital yourneys or the one's that i have digitalized by making nice photos or mixing music hope you like it!</p>
+        </div>
+        
+    </div>
+</div>
+  </div>
+
+</main>
+<div class="container">
+  <footer class="d-flex flex-wrap justify-content-between align-items-center py-3 my-4 border-top">
+    <p class="col-md-4 mb-0 text-body-secondary">© 2023 Digital Sven</p>
+    
+
+    <a href="/" class="col-md-4 d-flex align-items-center justify-content-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+      <img src="/assets/logo.png" width="60" height="60" alt="the logo of the site">
+    </a>
+
+    <ul class="nav col-md-4 justify-content-end">
+      <li class="nav-item"><a href="/" class="nav-link px-2 text-body-secondary">Home</a></li>
+      <li class="nav-item"><a href="/tech/" class="nav-link px-2 text-body-secondary">Tech</a></li>
+      <li class="nav-item"><a href="/photo/" class="nav-link px-2 text-body-secondary">Photo</a></li>
+      <li class="nav-item"><a href="/music/" class="nav-link px-2 text-body-secondary">Music</a></li>
+      <li class="nav-item"><a href="/about/" class="nav-link px-2 text-body-secondary">About</a></li>
+    </ul>
+    <p class="col-md-4 mb-0 text-body-secondary">V0.0.7, build Date: Tue, 11 Jul 2023 14:57:21 GMT</p>
+  </footer>
+</div>  
+  <script src="/main.js"></script>
+</body> 
+</html>
