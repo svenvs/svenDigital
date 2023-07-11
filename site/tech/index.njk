@@ -11,7 +11,7 @@ menuActive: tech
             </h1>
             {%- for post in collections.techSortByDate -%}
                 <div class="card mb-3">
-                    <img src="{{post.data.imgcard}}" class="card-img-top" alt="{{post.data.featuredIMGALT}}">
+                    <img src="{{post.data.thumb}}" class="card-img-top" alt="{{post.data.featuredIMGALT}}">
                     <div class="card-body">
                         <h5 class="card-title">{{post.data.title}}</h5>
                         <p class="card-text">{{post.data.featuredText}}</p>
