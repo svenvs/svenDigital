@@ -1,7 +1,7 @@
 // Import our custom CSS
 import './scss/styles.scss';
 import Masonry from 'masonry-layout';
-import imagesLoaded from 'imagesLoaded';
+import imagesLoaded from 'imagesloaded';
 
 // Import all of Bootstrap's JS
 import * as bootstrap from 'bootstrap';
