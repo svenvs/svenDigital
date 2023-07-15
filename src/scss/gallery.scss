@@ -1,0 +1,27 @@
+.gallery{
+
+}
+
+/* clear fix */
+.gallery:after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+
+.gallery-gutter-sizer {
+    width: 1%;
+}
+
+.gallery-item, .gallery-sizer {
+    width: 31.333%;
+}
+.gallery-item{
+    margin-bottom: 1%;
+    float: left;
+    img {
+        border-radius: 2%;
+        display: block;
+        max-width: 100%;
+    }
+}

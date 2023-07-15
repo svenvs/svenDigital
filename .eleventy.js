@@ -1,10 +1,31 @@
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-
-
+const Image = require("@11ty/eleventy-img");
 
 module.exports = function (eleventyConfig) {
     eleventyConfig.addPassthroughCopy('./site/assets');
     eleventyConfig.addPlugin(syntaxHighlight);
+
+    eleventyConfig.addShortcode("image", async function(src, alt, sizes, gallery) {
+      let metadata = await Image(src, {
+        widths: [300, 600],
+        outputDir: "./dist/img/"
+      });
+  
+      let imageAttributes = {
+        alt,
+        sizes,
+        loading: "lazy",
+        decoding: "async",
+      };
+
+      if (gallery){
+        // hack for masonary height is messing the pictures up
+        return Image.generateHTML(metadata, imageAttributes).replace('height', 'data-noHeight');
+      } else {
+        return Image.generateHTML(metadata, imageAttributes);
+      }
+      
+    });
     
     eleventyConfig.addCollection("techSortByDate", function(collectionApi) {
 
