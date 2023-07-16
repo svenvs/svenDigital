@@ -13,9 +13,11 @@
     width: 1%;
 }
 
-.gallery-item, .gallery-sizer {
-    width: 31.333%;
-}
+@include media-breakpoint-down(md) { 
+    .gallery-item, .gallery-sizer {
+        width: 47.333%;
+    }
+ }
 .gallery-item{
     margin-bottom: 1%;
     float: left;
@@ -25,3 +27,4 @@
         max-width: 100%;
     }
 }
+
