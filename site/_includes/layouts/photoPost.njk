@@ -1,0 +1,26 @@
+---
+layout: layouts/defaultLayout.njk
+---
+
+<main class="container pt-2">
+  <div class="row">
+    <div class="col-md-8">
+      <h1 class="pb-4 mb-4 fst-italic border-bottom">
+        {{ title }}
+      </h1>
+      <article class="blog-post">
+        {{ content | safe }}
+      </article>
+      <div class="gallery">
+        <div class="gallery-sizer"></div>
+        <div class="gallery-gutter-sizer"></div>
+        {%- for photo in images -%}
+        <div class="gallery-item">
+          {% image photo.pic, photo.alt, "(min-width: 30em) 50vw, 100vw", true %}
+        </div>
+        {%- endfor -%}
+      </div>
+    </div>
+    {% include 'components/sidebar.njk' %}
+  </div>
+</main>
