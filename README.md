@@ -1,15 +1,10 @@
 # svenDigital
 Blog for all my digital endeavours
 
-## quick notes for me
-https://dev.to/derrickreimer/how-to-use-webpack-in-an-eleventy-project-272j
-
-https://dev.to/22mahmoud/how-to-optimize-and-lazyload-images-on-eleventy-11ty-206h
-
 ## todo
 - [x] add menu bar
 - [x] make menu responsive
-- [ ] Sticky menu bar
+- [x] Sticky menu bar
 - [ ] Fake neural network cover page
 - [x] add logo
 - [x] global 11ty vars site title etc
@@ -18,7 +13,7 @@ https://dev.to/22mahmoud/how-to-optimize-and-lazyload-images-on-eleventy-11ty-20
 - [ ] Create home page
 - [x] create default template
 - [ ] Hidden but not so hidden styleguide page
-- [ ] create blog template
+- [x] create blog template
 - [ ] create photo portfolio template
 - [ ] filter meganism posts
 - [ ] search meganism posts
@@ -29,7 +24,7 @@ https://dev.to/22mahmoud/how-to-optimize-and-lazyload-images-on-eleventy-11ty-20
 - [ ] snapshot testing
 - [ ] Change pipeline only when testing OK deploy to pr
 - [ ] Change pipeline deploy test branch to test env
-- [ ] Performance images
+- [x] Performance images
 - [ ] Performance SASS
 - [ ] PWA
 - [ ] Great colors light
