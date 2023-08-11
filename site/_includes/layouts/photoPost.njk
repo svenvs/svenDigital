@@ -15,11 +15,25 @@ layout: layouts/defaultLayout.njk
         <div class="gallery-sizer"></div>
         <div class="gallery-gutter-sizer"></div>
         {%- for photo in images -%}
-        <div class="gallery-item">
-          {% image photo.pic, photo.alt, "(min-width: 30em) 50vw, 100vw", true %}
-        </div>
+          <div class="gallery-item" data-bs-toggle="modal" data-bs-target="#galaryModal{{loop.index0}}">
+            {% image photo.pic, photo.alt, "(min-width: 30em) 50vw, 100vw", true %}
+          </div>
         {%- endfor -%}
       </div>
+      {%- for photo in images -%}
+        <div class="modal modal-xl  fade" id="galaryModal{{loop.index0}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-fullscreen-md-down">
+            <div class="modal-content">
+              <div class="modal-body text-center">
+                {% image photo.pic, photo.alt, "(min-width: 30em) 50vw, 100vw", true %}
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
     </div>
     {% include 'components/sidebar.njk' %}
   </div>

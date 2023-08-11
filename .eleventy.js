@@ -8,7 +8,11 @@ module.exports = function (eleventyConfig) {
     eleventyConfig.addShortcode("image", async function(src, alt, sizes, gallery) {
       let metadata = await Image(src, {
         widths: [300, 600],
-        outputDir: "./dist/img/"
+        outputDir: "./dist/img/",
+        //formats: ["webp"],
+        sharpOptions: {
+          quality:100,
+        }
       });
   
       let imageAttributes = {
@@ -16,11 +20,13 @@ module.exports = function (eleventyConfig) {
         sizes,
         loading: "lazy",
         decoding: "async",
+        class: "img-fluid",
+       // height: "null",
       };
 
       if (gallery){
-        // hack for masonary height is messing the pictures up
-        return Image.generateHTML(metadata, imageAttributes).replace('height', 'data-noHeight');
+        // hack for masonary height is messing the pictures up this for sure is gonne bite me one day :D
+        return Image.generateHTML(metadata, imageAttributes);
       } else {
         return Image.generateHTML(metadata, imageAttributes);
       }
