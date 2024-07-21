@@ -1,5 +1,5 @@
 const date = new Date();
-module.exports = function () {
+export default function () {
   return {
     siteTitle: 'Digital Sven',
     buildYear: date.getFullYear(),

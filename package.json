@@ -12,7 +12,7 @@
     "build": "npm run build:eleventy & npm run build:rollup"
   },
   "devDependencies": {
-    "@11ty/eleventy": "^3.0.0-alpha.13",
+    "@11ty/eleventy": "^3.0.0-alpha.17",
     "@rollup/plugin-image": "^3.0.3",
     "autoprefixer": "^10.4.19",
     "concurrently": "^8.2.2",
