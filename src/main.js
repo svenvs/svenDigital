@@ -1,22 +1,15 @@
 import './main.css'
-import { setupCounter } from './counter.js'
+import galery from './galery.js'
+import Alpine from 'alpinejs'
 
-document.querySelector('#app').innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
+window.addEventListener('DOMContentLoaded', () => {
+  console.log('--- Bootstrapping js Started ----');  
+  Alpine.start()
+});
 
-    </a>
-    <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank">
-
-    </a>
-    <h1>Hello Vite!</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite logo to learn more
-    </p>
-  </div>
-`
-
-setupCounter(document.querySelector('#counter'))
+document.addEventListener('alpine:init', () => {
+  const galeryElement = document.querySelector('#galery');
+  if(galeryElement !== null){
+    Alpine.data('galery', galery)
+  }
+})

@@ -1,0 +1,27 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: photoPaths
+  size: 10
+---
+
+<div class="grid min-h-[140px] w-full place-items-center overflow-x-scroll p-6 lg:overflow-visible pt-14">
+  <div class="grid grid-cols-1 gap-8 grid-flow-row auto-rows-max md:grid-cols-2 lg:grid-cols-3 transition-transform		" id="galery" x-data="galery">
+    <noscript>
+    {%- for item in pagination.items %}
+    <div>
+      <img class="object-cover object-center max-w-full"
+        src="/{{ item.path }}"
+        alt="" />
+    </div>
+    {% endfor -%}
+    </noscript>
+    <template x-for="(value, index) in photos">
+      <div :class="(value.orientation.value != 1) ? 'row-span-2' : ''">
+            <img class="object-cover object-center max-w-full"
+              x-bind:src="`/${value.path}`"
+            alt="" />
+      </div>
+    </template>
+  </div>
+</div>
