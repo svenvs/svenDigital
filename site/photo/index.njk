@@ -6,22 +6,58 @@ pagination:
 ---
 
 <div class="grid min-h-[140px] w-full place-items-center overflow-x-scroll p-6 lg:overflow-visible pt-14">
-  <div class="grid grid-cols-1 gap-8 grid-flow-row auto-rows-max md:grid-cols-2 lg:grid-cols-3 transition-transform		" id="galery" x-data="galery">
+  <div class="grid grid-cols-1 gap-8 grid-flow-row auto-rows-max md:grid-cols-2 lg:grid-cols-3" id="galery" x-data="galery">
     <noscript>
     {%- for item in pagination.items %}
     <div>
-      <img class="object-cover object-center max-w-full"
+      <img class="object-cover object-center h-full w-full transition duration-200 hover:scale-110"
         src="/{{ item.path }}"
         alt="" />
     </div>
     {% endfor -%}
     </noscript>
-    <template x-for="(value, index) in photos">
+    <template x-for="(value, index) in filterdPhotos">
       <div :class="(value.orientation.value != 1) ? 'row-span-2' : ''">
-            <img class="object-cover object-center max-w-full"
+            <img class="object-cover object-center h-full w-full transition duration-200 hover:scale-110"
               x-bind:src="`/${value.path}`"
             alt="" />
       </div>
     </template>
+
+    <div>
+  <div class="sm:hidden">
+    <label for="tabs" class="sr-only">Select a tab</label>
+    <!-- Use an "onChange" listener to redirect the user to the selected tab URL. -->
+    <select id="tabs" name="tabs" class="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500">
+      <option selected>My Account</option>
+      <option>Company</option>
+      <option>Team Members</option>
+      <option>Billing</option>
+    </select>
+  </div>
+  <button @click="alert('Hello World!')">Say Hi</button>
+  <div class="hidden sm:block">
+    <nav class="isolate flex divide-x divide-gray-200 rounded-lg shadow" aria-label="Tabs">
+      <!-- Current: "text-gray-900", Default: "text-gray-500 hover:text-gray-700" -->
+      <a href="#" @click="keyword = 'landschap'" class="group relative min-w-0 flex-1 overflow-hidden rounded-l-lg bg-white px-4 py-4 text-center text-sm font-medium text-gray-900 hover:bg-gray-50 focus:z-10" aria-current="page">
+        <span>landschap</span>
+        <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-0.5 bg-indigo-500"></span>
+      </a>
+      <a href="#" @click="keyword = 'mensen'" class="group relative min-w-0 flex-1 overflow-hidden bg-white px-4 py-4 text-center text-sm font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700 focus:z-10">
+        <span>mensen</span>
+        <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-0.5 bg-transparent"></span>
+      </a>
+      <a href="#" @click="keyword = 'straat'" class="group relative min-w-0 flex-1 overflow-hidden bg-white px-4 py-4 text-center text-sm font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700 focus:z-10">
+        <span>straat</span>
+        <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-0.5 bg-transparent"></span>
+      </a>
+      <a href="#" @click="keyword = 'wildlife'" class="group relative min-w-0 flex-1 overflow-hidden rounded-r-lg bg-white px-4 py-4 text-center text-sm font-medium text-gray-500 hover:bg-gray-50 hover:text-gray-700 focus:z-10">
+        <span>wildlife</span>
+        <span aria-hidden="true" class="absolute inset-x-0 bottom-0 h-0.5 bg-transparent"></span>
+      </a>
+    </nav>
+  </div>
+</div>
+    
   </div>
 </div>

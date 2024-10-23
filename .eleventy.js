@@ -1,5 +1,5 @@
 
-import { getAllFiles, getAllFilesSync } from 'get-all-files'
+import { getAllFilesSync } from 'get-all-files'
 import * as path from 'path'
 import ExifReader from 'exifreader';
 
@@ -13,11 +13,9 @@ function normalizeForBrowser(pad){
 export default async function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("assets");
 
-  for await (const filename of getAllFiles(`assets/photo/portfolio`)) {
-    // Could break early on some condition and get-all-files
-    // won't have unnecessarily accumulated the filenames in an array
+  for (const filename of getAllFilesSync(`assets/photo/portfolio`)) {
+    console.log(filename);
     const tags = await ExifReader.load(filename);
-
     paths.push({path: normalizeForBrowser(filename), keywords: tags?.Keywords, orientation: tags?.Orientation});
   }
 

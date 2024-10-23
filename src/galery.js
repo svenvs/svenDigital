@@ -1,5 +1,13 @@
 export default () => ({
   photos: [],
+  keyword: '',
+  filterClick(keyword){
+    console.log(keyword);
+    this.keyword = keyword
+  },
+  filterdPhotos(){
+    return this.photos.filter((photo)=>photo.path.includes(this.keyword))
+  },
   async init() {
     const url = "/api/photos.json";
     try {
