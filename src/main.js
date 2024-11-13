@@ -9,6 +9,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 document.addEventListener('alpine:init', () => {
   const galeryElement = document.querySelector('#galery');
+
   if(galeryElement !== null){
     Alpine.data('galery', galery)
   }
