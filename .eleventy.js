@@ -4,7 +4,7 @@ import * as path from 'path'
 import ExifReader from 'exifreader';
 
 let paths = [];
-
+//https://www.thumbor.org/ <<< hint :D
 function normalizeForBrowser(pad){
   //F u windows :D
   return path.normalize(pad).replaceAll('\\', '/');
